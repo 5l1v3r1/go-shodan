@@ -14,8 +14,8 @@ type Profile struct {
 	Created      float64 `json: "created"`
 }
 
-func (p *Client) Profile() (*Profile, error) {
-	req, err := http.Get(fmt.Sprintf("%s/api-info?key=%s", BaseURL, p.apiKey))
+func (s *Client) Profile() (*Profile, error) {
+	req, err := http.Get(fmt.Sprintf("%s/api-info?key=%s", BaseURL, s.apiKey))
 	if err != nil {
 		return nil, err
 	}
