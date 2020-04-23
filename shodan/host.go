@@ -1,19 +1,20 @@
 package host
 
+// HostInfo struct is responsible for returned data in Matches
 type HostInfo struct {
 	Os        string `json: "os"`
-	Timestamp `json: "timestamp"`
+	Timestamp string `json: "timestamp"`
 	Isp       string   `json: "isp"`
 	Asn       string   `json: "asn"`
 	Hostnames []string `json: "hostnames"`
 	IP        string   `json: "ip"`
 	Domains   []string `json: "domains"`
-	Org       `json: "org"`
-	Data      `json: "data"`
-	Port      `json: "port"`
-	Ip_string `json: "ip_string"`
+	Org       string `json: "org"`
+	Data      string `json: "data"`
+	Port      int `json: "port"`
+	Ip_string string `json: "ip_string"`
 }
-
+// HostLocation is responsible for returned data in a single element
 type HostLocation struct {
 	City          string  `json: "city"`
 	Region_code   int     `json: "region_code"`
@@ -27,6 +28,7 @@ type HostLocation struct {
 	Latitude      int     `json: "latitude"`
 }
 
+// HostSearch is responsible for parsing data from the response
 type HostSearch struct {
 	Matches []HostInfo `json: "matches"`
 }
