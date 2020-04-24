@@ -1,19 +1,26 @@
 package host
 
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+)
+
 // HostInfo struct is responsible for returned data in Matches
 type HostInfo struct {
-	Os        string `json: "os"`
-	Timestamp string `json: "timestamp"`
+	Os        string   `json: "os"`
+	Timestamp string   `json: "timestamp"`
 	Isp       string   `json: "isp"`
 	Asn       string   `json: "asn"`
 	Hostnames []string `json: "hostnames"`
 	IP        string   `json: "ip"`
 	Domains   []string `json: "domains"`
-	Org       string `json: "org"`
-	Data      string `json: "data"`
-	Port      int `json: "port"`
-	Ip_string string `json: "ip_string"`
+	Org       string   `json: "org"`
+	Data      string   `json: "data"`
+	Port      int      `json: "port"`
+	Ip_string string   `json: "ip_string"`
 }
+
 // HostLocation is responsible for returned data in a single element
 type HostLocation struct {
 	City          string  `json: "city"`
@@ -35,15 +42,14 @@ type HostSearch struct {
 
 func (s *Client) HostSearch(q string) (*HostSearch, error) {
 	res, err := http.Get(fmt.Sprintf("%s/shodan/host/search?key=%s&query=%s", BaseURL, s.apiKey, q))
-}
-if err != nil {
-	fmt.Println(err)
-}
-defer res.Body.Close()
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer res.Body.Close()
 
-var ret HostSearch
-if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
-	return nil, err
-}
-return &ret, nil
+	var ret HostSearch
+	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
+		return nil, err
+	}
+	return &ret, nil
 }
