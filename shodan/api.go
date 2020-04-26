@@ -1,4 +1,4 @@
-package api
+package shodan
 
 import (
 	"encoding/json"
