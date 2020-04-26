@@ -1,4 +1,4 @@
-package host
+package shodan
 
 import (
 	"encoding/json"
